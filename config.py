@@ -158,6 +158,43 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
+def init_widgets_list():
+	prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+	widgets_list = [
+               widget.Sep(
+                        linewidth = 0,
+                        padding = 6,
+                        foreground = colors[2],
+                        background = colors[0]
+                        ),
+
+				widget.GroupBox(font="Ubuntu Bold",
+                        fontsize = 9,
+                        margin_y = 0,
+                        margin_x = 0,
+                        padding_y = 5,
+                        padding_x = 5,
+                        borderwidth = 1,
+                        active = colors[2],
+                        inactive = colors[2],
+                        rounded = False,
+                        highlight_method = "block",
+                        this_current_screen_border = colors[5],
+                        this_screen_border = colors [1],
+                        other_current_screen_border = colors[0],
+                        other_screen_border = colors[0],
+                        foreground = colors[2],
+                        background = colors[0]
+                        ),
+				widget.CurrentLayout(
+                        foreground = colors[2],
+                        background = colors[7],
+                        padding = 5
+                        )
+				]
+	return widgets_list
+	
+	
 def init_group_names():
     return [("WWW", {'layout': 'monadtall'}),
             ("DEV", {'layout': 'monadtall'}),
@@ -174,23 +211,15 @@ def init_groups():
 
 
 
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    return widgets_screen1                       # Slicing removes unwanted widgets on Monitors 1,3
 
 
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.TextBox("default config", name="default"),
-                widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-            ],
-            24,
-        ),
-    ),
-]
+def init_screens():
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.95, size=20))]
+
+
 
 def init_mouse():
     return [Drag([mod], "Button1", lazy.window.set_position_floating(),      # Move floating windows
@@ -238,6 +267,10 @@ if __name__ in ["config", "__main__"]:
     layout_theme = init_layout_theme()
     border_args = init_border_args()
     layouts = init_layouts()
+    screens = init_screens()
+    #widget_defaults = init_widgets_defaults()
+    widgets_list = init_widgets_list()
+    widgets_screen1 = init_widgets_screen1()
 
 
 
