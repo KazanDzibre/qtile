@@ -34,7 +34,7 @@ from libqtile import layout, bar, widget, hook
 from typing import List  # noqa: F401
 
 mod = "mod4"
-
+myTerm = "termite"
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -60,36 +60,40 @@ def app_or_group(group, app):
     return f
 
 
-keys = [
-    # Switch between windows in current stack pane
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
+##### KEYBINDINGS
 
-    # Move windows up or down in current stack
-    Key([mod, "control"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "j", lazy.layout.shuffle_up()),
+def init_keys():
+    keys = [
+        # Switch between windows in current stack pane
+        Key([mod], "k", lazy.layout.down()),
+        Key([mod], "j", lazy.layout.up()),
 
-    # Switch window focus to other pane(s) of stack
-    Key([mod], "space", lazy.layout.next()),
+        # Move windows up or down in current stack
+        Key([mod, "control"], "k", lazy.layout.shuffle_down()),
+        Key([mod, "control"], "j", lazy.layout.shuffle_up()),
 
-    # Swap panes of split stack
-    Key([mod, "shift"], "space", lazy.layout.rotate()),
+        # Switch window focus to other pane(s) of stack
+        Key([mod], "space", lazy.layout.next()),
 
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("termite")),
+        # Swap panes of split stack
+        Key([mod, "shift"], "space", lazy.layout.rotate()),
 
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout()),
-    Key([mod], "w", lazy.window.kill()),
+        # Toggle between split and unsplit sides of stack.
+        # Split = all windows displayed
+        # Unsplit = 1 window displayed, like Max layout, but still with
+        # multiple stack panes
+        Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+        Key([mod], "Return", lazy.spawn("termite")),
 
-    Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "r", lazy.spawncmd()),
-]
+        # Toggle between different layouts as defined below
+        Key([mod], "Tab", lazy.next_layout()),
+        Key([mod], "w", lazy.window.kill()),
+
+        Key([mod, "control"], "r", lazy.restart()),
+        Key([mod, "control"], "q", lazy.shutdown()),
+        Key([mod], "r", lazy.spawncmd()),
+        ]
+    return keys
 
 
 @hook.subscribe.startup_once
@@ -186,7 +190,7 @@ if __name__ in ["config", "__main__"]:
     layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
-
+    keys = init_keys()
 ##### SETS GROUPS KEYBINDINGS #####
 
 for i, (name, kwargs) in enumerate(group_names, 1):
