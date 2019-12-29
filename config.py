@@ -81,10 +81,16 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
     ])
 
-layouts = [
-    layout.Max(),
-    layout.Stack(num_stacks=2)
-]
+
+
+def init_layouts():
+    return [layout.MonadTall(),
+            layout.Max(),
+            layout.Floating()
+            ]
+
+
+
 
 widget_defaults = dict(
     font='sans',
@@ -142,6 +148,12 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+if __name__ in ["config", "__main__"]:
+    mod = "mod4"
+    layouts = init_layouts()
+
+
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
