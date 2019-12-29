@@ -66,21 +66,10 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 ]
 
-groups = [Group(i) for i in "asdfuiop"]
 
 @hook.subscribe.startup_once
 def start_once():
     os.system("nitrogen --restore &")
-
-for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-    ])
-
 
 
 def init_layouts():
@@ -98,6 +87,24 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+
+
+def init_group_names():
+    return [("WWW", {'layout': 'monadtall'}),
+            ("DEV", {'layout': 'monadtall'}),
+            ("SYS", {'layout': 'monadtall'}),
+            ("DOC", {'layout': 'monadtall'}),
+            ("VBOX", {'layout': 'monadtall'}),
+            ("CHAT", {'layout': 'monadtall'}),
+            ("MUS", {'layout': 'monadtall'}),
+            ("VID", {'layout': 'monadtall'}),
+            ("GFX", {'layout': 'floating'})]
+
+def init_groups():
+    return [Group(name, **kwargs) for name, kwargs in group_names]
+
+
+
 
 screens = [
     Screen(
@@ -152,7 +159,8 @@ focus_on_window_activation = "smart"
 if __name__ in ["config", "__main__"]:
     mod = "mod4"
     layouts = init_layouts()
-
+    group_names = init_group_names()
+    groups = init_groups()
 
 
 
