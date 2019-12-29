@@ -186,9 +186,20 @@ def init_widgets_list():
                         foreground = colors[2],
                         background = colors[0]
                         ),
+                widget.Sep(
+                        linewidth = 0,
+                        padding = 10,
+                        foreground = colors[2],
+                        background = colors[0]
+                        ),
 				widget.CurrentLayout(
                         foreground = colors[2],
                         background = colors[7],
+                        padding = 5
+                        ),
+                widget.Net(
+                        foreground = colors[2],
+                        background = colors[5],
                         padding = 5
                         )
 				]
