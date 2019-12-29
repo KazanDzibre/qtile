@@ -130,8 +130,8 @@ def init_floating_layout():
 
 
 def init_layout_theme():
-    return {"border_width": 2,
-            "margin": 4,
+    return {"border_width": 3,
+            "margin": 5,
             "border_focus": "3db1e3",
             "border_normal": "1e24d4"
            }
