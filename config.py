@@ -104,7 +104,7 @@ def init_keys():
 ##### BAR COLORS #####
 
 def init_colors():
-    return [["#eb4034", "#282a36"], # panel background
+    return [["#282a36", "#282a36"], # panel background
             ["#434758", "#434758"], # background for current screen tab
             ["#ffffff", "#ffffff"], # font color for group names
             ["#ff5555", "#ff5555"], # background color for layout widget
@@ -115,6 +115,7 @@ def init_colors():
             ["#9AEDFE", "#9AEDFE"], # background color for cmus widget
             ["#000000", "#000000"], # background color for clock widget
             ["#434758", "#434758"]] # background color for systray widget
+
 
 
 @hook.subscribe.startup_once
@@ -131,8 +132,8 @@ def init_floating_layout():
 def init_layout_theme():
     return {"border_width": 2,
             "margin": 4,
-            "border_focus": "AD69AF",
-            "border_normal": "1D2330"
+            "border_focus": "3db1e3",
+            "border_normal": "1e24d4"
            }
 
 def init_border_args():
