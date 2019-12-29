@@ -173,14 +173,13 @@ screens = [
     ),
 ]
 
-# Drag floating layouts.
-mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front())
-]
+def init_mouse():
+    return [Drag([mod], "Button1", lazy.window.set_position_floating(),      # Move floating windows
+                 start=lazy.window.get_position()),
+            Drag([mod], "Button3", lazy.window.set_size_floating(),          # Resize floating windows
+                 start=lazy.window.get_size()),
+            Click([mod, "shift"], "Button1", lazy.window.bring_to_front())]  # Bring floating window to front
+
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
@@ -207,14 +206,17 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
+
 if __name__ in ["config", "__main__"]:
     mod = "mod4"
     
     colors = init_colors()
+    keys = init_keys()
+    mouse = init_mouse()
     layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
-    keys = init_keys()
+    
 ##### SETS GROUPS KEYBINDINGS #####
 
 for i, (name, kwargs) in enumerate(group_names, 1):
