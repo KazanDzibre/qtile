@@ -122,6 +122,23 @@ def start_once():
     os.system("nitrogen --restore &")
 
 
+##### LAYOUTS #####
+
+def init_floating_layout():
+    return layout.Floating(border_focus="#3B4022")
+
+
+def init_layout_theme():
+    return {"border_width": 2,
+            "margin": 4,
+            "border_focus": "AD69AF",
+            "border_normal": "1D2330"
+           }
+
+def init_border_args():
+    return {"border_width": 2}
+    
+
 def init_layouts():
     return [layout.MonadTall(),
             layout.Max(),
@@ -153,6 +170,7 @@ def init_group_names():
 
 def init_groups():
     return [Group(name, **kwargs) for name, kwargs in group_names]
+
 
 
 
@@ -216,6 +234,7 @@ if __name__ in ["config", "__main__"]:
     layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
+    floating_layout = init_floating_layout()
     
 ##### SETS GROUPS KEYBINDINGS #####
 
