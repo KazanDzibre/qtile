@@ -186,6 +186,13 @@ def init_widgets_list():
                         foreground = colors[2],
                         background = colors[0]
                         ),
+                widget.Prompt(
+                        prompt=prompt,
+                        font="Ubuntu Mono",
+                        padding=10,
+                        foreground = colors[3],
+                        background = colors[1]
+                        ),
                 widget.Sep(
                         linewidth = 0,
                         padding = 10,
@@ -197,10 +204,19 @@ def init_widgets_list():
                         background = colors[7],
                         padding = 5
                         ),
-                widget.Net(
-                        foreground = colors[2],
-                        background = colors[5],
-                        padding = 5
+                widget.TextBox(
+                        font="Ubuntu Bold",
+                        text=" ♫",
+                        padding = 5,
+                        foreground=colors[2],
+                        background=colors[7],
+                        fontsize=14
+                        ),
+               widget.Cmus(
+                        max_chars = 40,
+                        update_interval = 0.5,
+                        foreground=colors[2],
+                        background = colors[7]
                         )
 				]
 	return widgets_list
