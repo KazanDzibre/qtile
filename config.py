@@ -109,6 +109,7 @@ def start_once():
 def init_layouts():
     return [layout.MonadTall(),
             layout.Max(),
+            layout.Stack(num_stacks=2),
             layout.Floating()
             ]
 
