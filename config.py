@@ -35,6 +35,31 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 
+
+@lazy.function
+def window_to_prev_group(qtile):
+    if qtile.currentWindow is not None:
+        i = qtile.groups.index(qtile.currentGroup)
+        qtile.currentWindow.togroup(qtile.groups[i - 1].name)
+
+@lazy.function
+def window_to_next_group(qtile):
+    if qtile.currentWindow is not None:
+        i = qtile.groups.index(qtile.currentGroup)
+        qtile.currentWindow.togroup(qtile.groups[i + 1].name)
+
+##### LAUNCH APPS IN SPECIFIED GROUPS #####
+
+def app_or_group(group, app):
+    def f(qtile):
+        if qtile.groupMap[group].windows:
+            qtile.groupMap[group].cmd_toscreen()
+        else:
+            qtile.groupMap[group].cmd_toscreen()
+            qtile.cmd_spawn(app)
+    return f
+
+
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "k", lazy.layout.down()),
@@ -161,6 +186,12 @@ if __name__ in ["config", "__main__"]:
     layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
+
+##### SETS GROUPS KEYBINDINGS #####
+
+for i, (name, kwargs) in enumerate(group_names, 1):
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))          # Switch to another group
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))   # Send current window to another group
 
 
 
