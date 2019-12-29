@@ -140,10 +140,10 @@ def init_border_args():
     
 
 def init_layouts():
-    return [layout.MonadTall(),
-            layout.Max(),
-            layout.Stack(num_stacks=2),
-            layout.Floating()
+    return [layout.MonadTall(**layout_theme),
+            layout.Max(**layout_theme),
+            layout.Stack(num_stacks=2, **layout_theme),
+            layout.Floating(**layout_theme)
             ]
 
 
@@ -231,11 +231,15 @@ if __name__ in ["config", "__main__"]:
     colors = init_colors()
     keys = init_keys()
     mouse = init_mouse()
-    layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
     floating_layout = init_floating_layout()
-    
+    layout_theme = init_layout_theme()
+    border_args = init_border_args()
+    layouts = init_layouts()
+
+
+
 ##### SETS GROUPS KEYBINDINGS #####
 
 for i, (name, kwargs) in enumerate(group_names, 1):
