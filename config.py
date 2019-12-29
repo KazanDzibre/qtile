@@ -101,6 +101,22 @@ def init_keys():
     return keys
 
 
+##### BAR COLORS #####
+
+def init_colors():
+    return [["#eb4034", "#282a36"], # panel background
+            ["#434758", "#434758"], # background for current screen tab
+            ["#ffffff", "#ffffff"], # font color for group names
+            ["#ff5555", "#ff5555"], # background color for layout widget
+            ["#000000", "#000000"], # background for other screen tabs
+            ["#A77AC4", "#A77AC4"], # dark green gradiant for other screen tabs
+            ["#50fa7b", "#50fa7b"], # background color for network widget
+            ["#7197E7", "#7197E7"], # background color for pacman widget
+            ["#9AEDFE", "#9AEDFE"], # background color for cmus widget
+            ["#000000", "#000000"], # background color for clock widget
+            ["#434758", "#434758"]] # background color for systray widget
+
+
 @hook.subscribe.startup_once
 def start_once():
     os.system("nitrogen --restore &")
@@ -193,6 +209,8 @@ focus_on_window_activation = "smart"
 
 if __name__ in ["config", "__main__"]:
     mod = "mod4"
+    
+    colors = init_colors()
     layouts = init_layouts()
     group_names = init_group_names()
     groups = init_groups()
