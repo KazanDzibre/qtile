@@ -35,6 +35,8 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 myTerm = "termite"
+browser = "firefox"
+
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -83,11 +85,11 @@ def init_keys():
         # Unsplit = 1 window displayed, like Max layout, but still with
         # multiple stack panes
         Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-        Key([mod], "Return", lazy.spawn("termite")),
-
+        Key([mod], "Return", lazy.spawn(myTerm)),
+        Key([mod],"w", lazy.spawn(browser)),
         # Toggle between different layouts as defined below
         Key([mod], "Tab", lazy.next_layout()),
-        Key([mod], "w", lazy.window.kill()),
+        Key([mod, "shift"], "c", lazy.window.kill()),
 
         Key([mod, "control"], "r", lazy.restart()),
         Key([mod, "control"], "q", lazy.shutdown()),
