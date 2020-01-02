@@ -38,7 +38,7 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 myTerm = "termite"
-browser = "firefox"
+browser = "brave"
 
 
 @lazy.function
@@ -94,6 +94,15 @@ def init_keys():
         Key([mod], "Tab", lazy.next_layout()),
         Key([mod, "shift"], "c", lazy.window.kill()),
 
+		#DODACI
+		Key([mod, "shift"], "l", lazy.layout.grow(),lazy.layout.increase_nmaster()),
+		Key([mod, "shift"], "h", lazy.layout.shrink(),lazy.layout.decrease_nmaster()),
+		Key([mod, "shift"], "o", window_to_prev_group),
+		Key([mod, "shift"], "p", window_to_next_group),
+		Key([mod, "shift"], "space",lazy.layout.rotate(),lazy.layout.flip()),
+
+	
+
         Key([mod, "control"], "r", lazy.restart()),
         Key([mod, "control"], "q", lazy.shutdown()),
         Key([mod], "r", lazy.spawncmd()),
@@ -107,11 +116,11 @@ def init_colors():
     return [["#282a36", "#282a36"], # panel background
             ["#434758", "#434758"], # background for current screen tab
             ["#ffffff", "#ffffff"], # font color for group names
-            ["#ff5555", "#ff5555"], # background color for layout widget
+            ["#4038e0", "#3883e0"], # background color for layout widget
             ["#000000", "#000000"], # background for other screen tabs
             ["#A77AC4", "#A77AC4"], # dark green gradiant for other screen tabs
-            ["#50fa7b", "#50fa7b"], # background color for network widget
-            ["#7197E7", "#7197E7"], # background color for pacman widget
+            ["#4038e0", "#4038e0"], # background color for network widget
+            ["#4038e0", "#4038e0"], # background color for pacman widget
             ["#9AEDFE", "#9AEDFE"], # background color for cmus widget
             ["#000000", "#000000"], # background color for clock widget
             ["#434758", "#434758"]] # background color for systray widget
@@ -159,16 +168,15 @@ extension_defaults = widget_defaults.copy()
 
 
 def init_widgets_list():
-	prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-	widgets_list = [
+    prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+    widgets_list = [
                widget.Sep(
                         linewidth = 0,
                         padding = 6,
                         foreground = colors[2],
                         background = colors[0]
                         ),
-
-				widget.GroupBox(font="Ubuntu Bold",
+               widget.GroupBox(font="Ubuntu Bold",
                         fontsize = 9,
                         margin_y = 0,
                         margin_x = 0,
@@ -186,25 +194,47 @@ def init_widgets_list():
                         foreground = colors[2],
                         background = colors[0]
                         ),
-                widget.Prompt(
+               widget.Prompt(
                         prompt=prompt,
                         font="Ubuntu Mono",
                         padding=10,
                         foreground = colors[3],
                         background = colors[1]
                         ),
-                widget.Sep(
+               widget.Sep(
                         linewidth = 0,
                         padding = 10,
                         foreground = colors[2],
                         background = colors[0]
                         ),
-				widget.CurrentLayout(
+               widget.WindowName(font="Ubuntu",
+                        fontsize = 11,
+                        foreground = colors[5],
+                        background = colors[0],
+                        padding = 5
+                        ),
+               widget.Systray(
+                        background=colors[10],
+                        padding = 5
+                        ),
+               widget.Net(
+                        interface = "wlp18s0b1",
+                        foreground = colors[2],
+                        background = colors[5],
+                        padding = 5
+                        ),
+               widget.CurrentLayout(
                         foreground = colors[2],
                         background = colors[7],
                         padding = 5
                         ),
-                widget.TextBox(
+               widget.Pacman(
+                        execute = "urxvtc",
+                        update_interval = 1800,
+                        foreground = colors[2],
+                        background = colors[5]
+                        ),
+               widget.TextBox(
                         font="Ubuntu Bold",
                         text=" ♫",
                         padding = 5,
@@ -217,19 +247,31 @@ def init_widgets_list():
                         update_interval = 0.5,
                         foreground=colors[2],
                         background = colors[7]
+                        ),
+               widget.Clock(
+                        foreground = colors[2],
+                        background = colors[5],
+                        format="%A, %B %d - %H:%M"
+                        ),
+               widget.Sep(
+                        linewidth = 0,
+                        padding = 5,
+                        foreground = colors[0],
+                        background = colors[5]
                         )
-				]
-	return widgets_list
+              ]
+    return widgets_list
+
 	
 	
 def init_group_names():
     return [("WWW", {'layout': 'monadtall'}),
             ("DEV", {'layout': 'monadtall'}),
-            ("SYS", {'layout': 'monadtall'}),
+            ("MUS", {'layout': 'monadtall'}),
             ("DOC", {'layout': 'monadtall'}),
             ("VBOX", {'layout': 'monadtall'}),
             ("CHAT", {'layout': 'monadtall'}),
-            ("MUS", {'layout': 'monadtall'}),
+            ("SYS", {'layout': 'monadtall'}),
             ("VID", {'layout': 'monadtall'}),
             ("GFX", {'layout': 'floating'})]
 
