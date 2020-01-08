@@ -248,16 +248,21 @@ def init_widgets_list():
                         foreground=colors[2],
                         background = colors[7]
                         ),
+               widget.BatteryIcon(
+                        background = colors[5]
+                       ),
+               widget.Battery(
+                        background = colors[5]
+                       ),
+               widget.CapsNumLockIndicator(
+                        background = colors[5], 
+                        foreground = colors[2],
+                        font = "Ubuntu Bold"
+                       ),
                widget.Clock(
                         foreground = colors[2],
                         background = colors[5],
                         format="%A, %B %d - %H:%M"
-                        ),
-               widget.Sep(
-                        linewidth = 0,
-                        padding = 5,
-                        foreground = colors[0],
-                        background = colors[5]
                         )
               ]
     return widgets_list
