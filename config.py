@@ -89,7 +89,11 @@ def init_keys():
         # multiple stack panes
         Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
         Key([mod], "Return", lazy.spawn(myTerm)),
+        Key([mod], "s", lazy.spawn("stacer")),
         Key([mod],"w", lazy.spawn(browser)),
+        Key([mod],"q", lazy.spawn("qutebrowser")),
+        Key([mod],"g", lazy.spawn("gimp")),
+        Key([mod],"t", lazy.spawn("qbittorrent")),
         # Toggle between different layouts as defined below
         Key([mod], "Tab", lazy.next_layout()),
         Key([mod, "shift"], "c", lazy.window.kill()),
@@ -101,7 +105,9 @@ def init_keys():
 		Key([mod, "shift"], "p", window_to_next_group),
 		Key([mod, "shift"], "space",lazy.layout.rotate(),lazy.layout.flip()),
 
-	
+                Key([mod, "shift"], "Left",window_to_prev_group),
+                Key([mod, "shift"], "Right",window_to_next_group),
+
 
         Key([mod, "control"], "r", lazy.restart()),
         Key([mod, "control"], "q", lazy.shutdown()),
@@ -147,7 +153,7 @@ def init_layout_theme():
 
 def init_border_args():
     return {"border_width": 2}
-    
+
 
 def init_layouts():
     return [layout.MonadTall(**layout_theme),
@@ -217,22 +223,34 @@ def init_widgets_list():
                         background=colors[10],
                         padding = 5
                         ),
+               widget.Image(
+                        filename="/home/rule/slike/slika1.png"
+                        ),
                widget.Net(
                         interface = "wlp18s0b1",
                         foreground = colors[2],
                         background = colors[5],
                         padding = 5
                         ),
+               widget.Image(
+                        filename="/home/rule/slike/slika3.png"
+                        ),
                widget.CurrentLayout(
                         foreground = colors[2],
                         background = colors[7],
                         padding = 5
+                        ),
+               widget.Image(
+                        filename="/home/rule/slike/slika2.png"
                         ),
                widget.Pacman(
                         execute = "urxvtc",
                         update_interval = 1800,
                         foreground = colors[2],
                         background = colors[5]
+                        ),
+               widget.Image(
+                        filename="/home/rule/slike/slika3.png"
                         ),
                widget.TextBox(
                         font="Ubuntu Bold",
@@ -248,16 +266,14 @@ def init_widgets_list():
                         foreground=colors[2],
                         background = colors[7]
                         ),
-               widget.BatteryIcon(
-                        background = colors[5]
-                       ),
-               widget.Battery(
-                        background = colors[5]
-                       ),
+               widget.Image(
+                        filename="/home/rule/slike/slika2.png"
+                        ),
                widget.CapsNumLockIndicator(
-                        background = colors[5], 
+                        background = colors[5],
                         foreground = colors[2],
-                        font = "Ubuntu Bold"
+                        font = "Ubuntu Bold",
+                        update_interval = 0.1
                        ),
                widget.Clock(
                         foreground = colors[2],
@@ -267,8 +283,8 @@ def init_widgets_list():
               ]
     return widgets_list
 
-	
-	
+
+
 def init_group_names():
     return [("WWW", {'layout': 'monadtall'}),
             ("DEV", {'layout': 'monadtall'}),
@@ -331,7 +347,7 @@ focus_on_window_activation = "smart"
 
 if __name__ in ["config", "__main__"]:
     mod = "mod4"
-    
+
     colors = init_colors()
     keys = init_keys()
     mouse = init_mouse()
