@@ -98,9 +98,10 @@ def init_keys():
         Key([mod], "Return", lazy.spawn(myTerm)),
         Key([mod], "s", lazy.spawn("stacer")),
         Key([mod],"w", lazy.spawn(browser)),
-        Key([mod],"x", lazy.spawn("scrot /home/rule/screenshots/%Y-%m-%d-%T-screenshot.png")),
+        Key([mod],"x", lazy.spawn("deepin-screenshot")),
         Key([mod],"q", lazy.spawn("qutebrowser")),
         Key([mod],"g", lazy.spawn("gimp")),
+        Key([mod],"o", lazy.spawn("olivia")),
         Key([mod],"t", lazy.spawn("qbittorrent")),
         # Toggle between different layouts as defined below
         Key([mod], "Tab", lazy.next_layout()),
